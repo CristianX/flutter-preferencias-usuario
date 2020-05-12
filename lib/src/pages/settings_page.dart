@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 // Widget
 import 'package:preferenciasusuario/src/widgets/menuLateral_widget.dart';
 
+// Dependencia de preferencias
+import 'package:shared_preferences/shared_preferences.dart';
+
 class SettingsPage extends StatefulWidget {
 
 // Definiendo nombre de la página para otra forma de enrutamiento
@@ -25,7 +28,31 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() { 
     super.initState();
+
+    cargarPref();
+    
     _textController = new TextEditingController( text: _nombre );
+  }
+
+  // Para llamarlo al initState
+  cargarPref() async {
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Llamando preferencias con llave de 'genero'
+    _genero = prefs.getInt('genero');
+
+    setState(() {});
+  }
+
+  _setRadioSeleccionado( int valor ) async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Guardando preferencias con llave de 'genero'
+    prefs.setInt('genero', valor);
+    _genero = valor;
+
+    setState(() {});
   }
 
 
@@ -62,21 +89,13 @@ class _SettingsPageState extends State<SettingsPage> {
               value: 1, 
               title: Text('Masculino'),
               groupValue: _genero,
-              onChanged: ( value ) { 
-                setState(() {
-                _genero = value;
-                });
-              },
+              onChanged: _setRadioSeleccionado,
             ),
             RadioListTile(
               value: 2, 
               title: Text('Femenino'),
               groupValue: _genero,
-              onChanged: ( value ) { 
-                setState(() {
-                _genero = value;
-                });
-              },
+              onChanged: _setRadioSeleccionado,
             ),
             
             Divider(),
