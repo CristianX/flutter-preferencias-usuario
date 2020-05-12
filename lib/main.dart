@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+
+// Vistas
+import 'package:preferenciasusuario/src/pages/home_page.dart';
+import 'package:preferenciasusuario/src/pages/settings_page.dart';
+ 
+void main() => runApp(MyApp());
+ 
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Preferencias',
+
+      // otra forma de usar rutas
+      initialRoute: HomePage.routeName,
+      routes: {
+        HomePage.routeName     : ( BuildContext context ) => HomePage(),
+        SettingsPage.routeName : ( BuildContext context ) => SettingsPage(),
+        
+      },
+    );
+  }
+}
