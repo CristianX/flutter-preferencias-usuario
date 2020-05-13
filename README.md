@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-<!-- Dependencias -->
+## Dependencias
 - Share Preferences `shared_preferences: ^0.5.7+2` <!-- Para usar persistencia de datos sin SQLite -->
 
 ## Getting Started
