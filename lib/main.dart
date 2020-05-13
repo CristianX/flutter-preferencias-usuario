@@ -3,8 +3,21 @@ import 'package:flutter/material.dart';
 // Vistas
 import 'package:preferenciasusuario/src/pages/home_page.dart';
 import 'package:preferenciasusuario/src/pages/settings_page.dart';
+
+// share_prefs
+import 'package:preferenciasusuario/src/share_prefs/preferencias_usuario.dart';
  
-void main() => runApp(MyApp());
+void main() async {
+
+  // Corección de errores de carga de preferencias
+  WidgetsFlutterBinding.ensureInitialized();
+  // Llamando preferencias de usuario para cuando está cargando la aplicación
+  final prefs = new PreferenciasUsuario();
+  // Para que no se ejecute la aplicación hasta que las preferecias hayan sido cargadas e inicializadas
+  await prefs.initPrefs();
+
+  runApp(MyApp());
+}
  
 class MyApp extends StatelessWidget {
   @override
