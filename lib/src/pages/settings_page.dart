@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 // Widget
 import 'package:preferenciasusuario/src/widgets/menuLateral_widget.dart';
 
-// Dependencia de preferencias
-import 'package:shared_preferences/shared_preferences.dart';
+
+// share_prefs
+import 'package:preferenciasusuario/src/share_prefs/preferencias_usuario.dart';
+
 
 class SettingsPage extends StatefulWidget {
 
@@ -17,39 +19,36 @@ static final String routeName = 'settings';
 
 class _SettingsPageState extends State<SettingsPage> {
 
-  bool _colorSecundario = false;
-  int _genero = 1;
-  String _nombre = 'Cristian';
+  bool _colorSecundario;
+  int _genero;
+  // String _nombre = 'Cristian';
 
   // Controller del campo de teto
   TextEditingController _textController;
+
+  // Inicializando preferencias de usuario
+  final prefs = new PreferenciasUsuario();  
 
   // Cuando se inicie el página
   @override
   void initState() { 
     super.initState();
 
-    cargarPref();
+    _genero = prefs.genero;
+    _colorSecundario = prefs.colorSecundario;
     
-    _textController = new TextEditingController( text: _nombre );
+    _textController = new TextEditingController( text: prefs.nombreUsuario );
   }
 
-  // Para llamarlo al initState
-  cargarPref() async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
+  
 
-    // Llamando preferencias con llave de 'genero'
-    _genero = prefs.getInt('genero');
-
-    setState(() {});
-  }
-
-  _setRadioSeleccionado( int valor ) async {
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  _setRadioSeleccionado( int valor ) {
 
     // Guardando preferencias con llave de 'genero'
-    prefs.setInt('genero', valor);
+    // prefs.setInt('genero', valor);
+
+    // Usando Getters y Setters
+    prefs.genero = valor;
     _genero = valor;
 
     setState(() {});
@@ -62,6 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
       appBar: AppBar( 
         title: Text('Ajustes'),
+        backgroundColor: ( prefs.colorSecundario ) ? Colors.teal : Colors.blue
        ),
       //  Aplicando menú lateral
        drawer: MenuLateralWidget(),
@@ -81,6 +81,8 @@ class _SettingsPageState extends State<SettingsPage> {
               //  Para redibujar
                setState(() {
                _colorSecundario = value;
+              //  Uso de preferencias_usuario
+              prefs.colorSecundario = value;
                });
               },
             ),
@@ -108,7 +110,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   labelText: 'Nombre',
                   helperText: 'Nombre completo'
                 ),
-                onChanged: ( value ) {},
+                onChanged: ( value ) {
+                  // Llamando preferencias_usuario
+                  prefs.nombreUsuario = value;
+                },
               ),
             )
          ],

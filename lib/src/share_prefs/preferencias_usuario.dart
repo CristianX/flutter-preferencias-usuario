@@ -39,4 +39,29 @@ class PreferenciasUsuario {
   }
 
 
+  // GETTERS Y SETERS del Color Secundaria
+  get colorSecundario {
+    // ?? indica que la propiedad por defecto o el valor por defecto será 1
+    return _prefs.getBool('colorSecundario') ?? false;
+  }
+
+  set colorSecundario( bool value ) {
+
+    _prefs.setBool('colorSecundario', value);
+
+  }
+
+  // GETTERS Y SETERS del Nombre Usuario
+  get nombreUsuario {
+    // ?? indica que la propiedad por defecto o el valor por defecto será 1
+    return _prefs.getString('nombreUsuario') ?? '';
+  }
+
+  set nombreUsuario( String value ) {
+
+    _prefs.setString('nombreUsuario', value);
+
+  }
+
+
 }

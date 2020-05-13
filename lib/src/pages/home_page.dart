@@ -23,6 +23,7 @@ class HomePage extends StatelessWidget {
 
       appBar: AppBar( 
         title: Text('Preferencias de usuario'),
+        backgroundColor: ( prefs.colorSecundario ) ? Colors.teal : Colors.blue,
        ),
 
       //  Menu lateral
@@ -31,11 +32,11 @@ class HomePage extends StatelessWidget {
        body: Column(
          mainAxisAlignment: MainAxisAlignment.center,
          children: <Widget>[
-           Text('Color secundario:'),
+           Text('Color secundario: ${ prefs.colorSecundario }'),
            Divider(),
            Text('Género: ${ prefs.genero }'),
            Divider(),
-           Text('Nombre Usuario:'),
+           Text('Nombre Usuario: ${ prefs.nombreUsuario }'),
            Divider()
          ],
        ),
