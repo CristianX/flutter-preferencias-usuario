@@ -18,6 +18,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // Grabar última página
+    prefs.ultimaPagina = HomePage.routeName;
+
 
     return Scaffold(
 

@@ -63,5 +63,17 @@ class PreferenciasUsuario {
 
   }
 
+  // GETTERS Y SETERS de la última página
+  get ultimaPagina {
+    // ?? indica que la propiedad por defecto o el valor por defecto será 1
+    return _prefs.getString('ultimaPagina') ?? 'home';
+  }
+
+  set ultimaPagina( String value ) {
+
+    _prefs.setString('ultimaPagina', value);
+
+  }
+
 
 }

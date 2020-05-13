@@ -38,6 +38,9 @@ class _SettingsPageState extends State<SettingsPage> {
     _colorSecundario = prefs.colorSecundario;
     
     _textController = new TextEditingController( text: prefs.nombreUsuario );
+
+    // Grabar última página
+    prefs.ultimaPagina = SettingsPage.routeName;
   }
 
   

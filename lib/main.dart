@@ -20,13 +20,17 @@ void main() async {
 }
  
 class MyApp extends StatelessWidget {
+
+  // Llamando preferencias de usuario para cuando está cargando la aplicación
+  final prefs = new PreferenciasUsuario();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Preferencias',
 
       // otra forma de usar rutas
-      initialRoute: HomePage.routeName,
+      initialRoute: prefs.ultimaPagina,
       routes: {
         HomePage.routeName     : ( BuildContext context ) => HomePage(),
         SettingsPage.routeName : ( BuildContext context ) => SettingsPage(),
